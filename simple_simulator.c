@@ -72,8 +72,8 @@ Do todos os comandos...
 #define DIV	35      // "100011"; -- DIV Rx Ry Rz 			-- Rx <- Ry / Rz / Rx <- Ry / Rz + C  -- b0=Carry		Format: < inst(6) | Rx(3) | Ry(3) | Rz(3)| C >
 #define INC	36      // "100100"; -- INC Rx / DEC Rx                 		-- Rx <- Rx + 1 / Rx <- Rx - 1  -- b6= INC/DEC : 0/1	Format: < inst(6) | Rx(3) | b6 | xxxxxx >
 #define LMOD 37     // "100101"; -- MOD Rx Ry Rz   			-- Rx <- Ry MOD Rz 	  	Format: < inst(6) | Rx(3) | Ry(3) | Rz(3)| x >
-
-#define POW 38      // "100110"; -- POW Rx Ry Rz			-- Rx <- (Ry)^Rz 	    Format: < inst(6) | Rx(3) | Ry(3) | Rz(3)| x > 
+//funcao POW(Pedro já tinha adicionado) MEXI
+#define POW 38      // "100110"; -- POW Rx Ry Rz			-- Rx <- (Ry)^Rz 	    Format: < inst(6) | Rx(3) | Ry(3) | Rz(3)| x >   MEXI
 
 // Logic Instructions (All should begin wiht "01"):
 #define LOGIC 1
@@ -179,7 +179,7 @@ int kbhit(void)
 int FR[16] = {0};  // Flag Register: <...|Negativo|StackUnderflow|StackOverflow|DivByZero|ArithmeticOverflow|carry|zero|equal|lesser|greater>
 
 
-float potency(float base, int exp); 
+float potency(float base, int exp); //Calcula a potência. Apenas expoentes inteiros. MEXI
 
 
 int main()
@@ -190,7 +190,7 @@ int main()
 	int LoadPC=0, IncPC=0, LoadIR=0, LoadSP=0, IncSP=0, DecSP=0, LoadMAR=0, LoadFR=0;
 	int M1=0, M2=0, M3=0, M4=0, M5=0, M6=0;
 	int selM1=0, selM2=0, selM3=0, selM4=0, selM5=0, selM6=0;
-	float selM7 = 0.0, selM8 = 0.0; 
+
 	int LoadReg[8] = {0};
 	int carry=0;// Flag do IR que indica se a ULA vai fazer opera��o com carry ou n�o 
 	int opcode=0;
@@ -427,7 +427,7 @@ loop:
 				case MULT:
 				case DIV:
 				case LMOD:
-
+//funcao POW(funcionamento dela é semelhante ao MULT) MEXI
 				case POW:
 				case LAND:
 				case LOR:
@@ -928,8 +928,8 @@ ResultadoUla ULA(unsigned int x, unsigned int y, unsigned int OP, int carry) {
 //Funcao POW				
 //fazer loop de multiplicacao
 				case POW:
-					result = 1;
-					while(){
+
+					while(1){
 						if(y != 0){
 							result = result * x;
 							y--;
@@ -1012,7 +1012,7 @@ ResultadoUla ULA(unsigned int x, unsigned int y, unsigned int OP, int carry) {
 	return resultadoUla;
 }
 
-/*float potency(float base, int exp){ /
+/*float potency(float base, int exp){ // MEXI ///pra facilitar, talvez seja melhor fazermos operacoes apenas com expoentes positivos <- MEXI2
     float value = 1;
 
     if(exp < 0){
