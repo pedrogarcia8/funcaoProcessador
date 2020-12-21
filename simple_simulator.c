@@ -928,7 +928,7 @@ ResultadoUla ULA(unsigned int x, unsigned int y, unsigned int OP, int carry) {
 //Funcao POW				
 //fazer loop de multiplicacao
 				case POW:
-
+					result = 1;
 					while(1){
 						if(y != 0){
 							result = result * x;
